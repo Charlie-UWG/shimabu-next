@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Footer } from "src/component/Footer";
-import { Links } from "../component/Links";
-import styles from "../styles/Home.module.css";
+import { Links } from "src/component/Links";
+import styles from "src/styles/Home.module.css";
 
 const Home = () => {
   return (
