@@ -1,6 +1,4 @@
-import Head from "next/head";
 import Image from "next/image";
-import styles from "src/styles/Home.module.css";
 
 export const Footer = () => {
   return (
@@ -10,7 +8,7 @@ export const Footer = () => {
       rel="noopener noreferrer"
     >
       Thanks by{" "}
-      <span className={styles.logo}>
+      <span className="h-auto ml-2">
         <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
       </span>
     </a>
