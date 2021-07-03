@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { Footer } from "src/component/Footer";
-import { Links } from "src/component/Links";
-import styles from "src/styles/Home.module.css";
+import { Footer } from "src/components/Footer";
+import { Main } from "src/components/Main";
 
 const Home = () => {
   return (
@@ -12,19 +11,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="py-16 px-0 flex flex-1 flex-col justify-center items-center">
-        <h1 className="text-8xl font-bold text-center p-4">
-          Page <a href="https://nextjs.org">Index</a>
-        </h1>
-
-        <p className="text-center leading-5 text-2xl">
-          Get started by editing{" "}
-          <code className="bg-gray-50 rounded-md p-3 text-lg">
-            pages/index.js
-          </code>
-        </p>
-        <Links />
-      </main>
+      <Main page="index" />
       <Footer />
     </div>
   );
