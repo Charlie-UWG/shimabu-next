@@ -26,13 +26,16 @@ export const Links = () => {
   ];
 
   return (
-    <ul className={styles.grid}>
+    <ul className="group flex items-center justify-center flex-wrap max-w-3xl mt-12">
       {ITEMS.map((item) => {
         return (
-          <li key={item.href} className={styles.card}>
+          <li
+            key={item.href}
+            className="m-4 p-6 text-left no-underline border border-solid rounded-lg w-5/12 transition-colors duration-150 text-yellow-50 hover:text-blue-300 border-white hover:border-blue-300"
+          >
             <a href={item.href}>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
+              <h2 className="text-2xl pb-4">{item.title}</h2>
+              <p className="text-xl leading-6">{item.description}</p>
             </a>
           </li>
         );
