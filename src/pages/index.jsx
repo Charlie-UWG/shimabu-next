@@ -6,6 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 
 const Home = () => {
   const [count, setCount] = useState(1);
+  const [text, setText] = useState("");
+  const [isShow, setIsShow] = useState(true);
 
   const handleClick = useCallback(() => {
     console.log(`アップ ${count}`);
@@ -15,6 +17,13 @@ const Home = () => {
     console.log(`ダウン ${count}`);
     setCount((count) => count - 1);
   }, [count]);
+
+  const handleDisplay = useCallback(() => {
+    setIsShow((isShow) => !isShow);
+  }, []);
+  const handleChangeText = useCallback((e) => {
+    setText(e.target.value.trim());
+  }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -31,21 +40,30 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="flex gap-4 justify-center items-center">
-        <button
-          className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
-          onClick={handleClick}
-        >
-          +
-        </button>
-        <p className="text-5xl">{count}</p>
-        <button
-          className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
-          onClick={handleClickDec}
-        >
-          -
-        </button>
-      </div>
+      {isShow ? (
+        <div className="flex gap-4 justify-center items-center">
+          <button
+            className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
+            onClick={handleClick}
+          >
+            +
+          </button>
+          <p className="text-5xl">{count}</p>
+          <button
+            className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
+            onClick={handleClickDec}
+          >
+            -
+          </button>
+        </div>
+      ) : null}
+      <input
+        type="text"
+        value={text}
+        onChange={handleChangeText}
+        className="my-3 mx-auto p-2"
+      />
+      <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
       <Main page="index" />
       <Footer />
     </div>
