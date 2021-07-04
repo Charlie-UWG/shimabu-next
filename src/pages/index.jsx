@@ -5,18 +5,22 @@ import { Header } from "src/components/Header";
 import { useCallback, useEffect, useState } from "react";
 
 const Home = () => {
-  //   const [foo, setFoo] = useState(1);
-  //   const handleClick = useCallback((e) => {
-  //     // e.preventDefault();
-  //     // alert(foo);
+  const [count, setCount] = useState(1);
+  const handleClick = useCallback((e) => {
+    setCount((count) => count + 1);
+  }, []);
+  const handleClickDec = useCallback((e) => {
+    setCount((count) => count - 1);
+  }, []);
 
-  //   }, []);
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
     return () => {
       document.body.style.backgroundColor = "";
     };
   }, []);
+
+  console.log(count);
 
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center h-screen">
@@ -29,11 +33,17 @@ const Home = () => {
       <div className="flex gap-4 justify-center items-center">
         <button
           className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
-          // onClick={handleClick}
+          onClick={handleClick}
         >
-          クリック
+          +
         </button>
-        <p className="text-xl">ボタン</p>
+        <p className="text-5xl">{count}</p>
+        <button
+          className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
+          onClick={handleClickDec}
+        >
+          -
+        </button>
       </div>
       <Main page="index" />
       <Footer />
