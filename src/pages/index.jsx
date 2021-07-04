@@ -6,12 +6,15 @@ import { useCallback, useEffect, useState } from "react";
 
 const Home = () => {
   const [count, setCount] = useState(1);
-  const handleClick = useCallback((e) => {
+
+  const handleClick = useCallback(() => {
+    console.log(`アップ ${count}`);
     setCount((count) => count + 1);
-  }, []);
-  const handleClickDec = useCallback((e) => {
+  }, [count]);
+  const handleClickDec = useCallback(() => {
+    console.log(`ダウン ${count}`);
     setCount((count) => count - 1);
-  }, []);
+  }, [count]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -19,8 +22,6 @@ const Home = () => {
       document.body.style.backgroundColor = "";
     };
   }, []);
-
-  console.log(count);
 
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center h-screen">
