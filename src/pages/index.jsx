@@ -6,11 +6,18 @@ import { useCounter } from "src/hooks/useCounter";
 import { useInputArray } from "src/hooks/useInputArray";
 import { useBgColor } from "src/hooks/useBgColor";
 
-const Home = () => {
-  const { count, isShow, handleClick, handleClickDec, handleDisplay } =
-    useCounter();
-  const { text, array, handleChangeText, handleAdd } = useInputArray();
-  useBgColor();
+const Home = (props) => {
+  const {
+    count,
+    isShow,
+    handleClick,
+    handleClickDec,
+    handleDisplay,
+    text,
+    array,
+    handleChangeText,
+    handleAdd,
+  } = props;
 
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center">

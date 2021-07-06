@@ -4,13 +4,18 @@ import { Main } from "src/components/Main";
 import { Header } from "src/components/Header";
 import { useEffect } from "react";
 
-const About = () => {
-  useEffect(() => {
-    document.body.style.backgroundColor = "lightgray";
-    return () => {
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
+const About = (props) => {
+  const {
+    count,
+    isShow,
+    handleClick,
+    handleClickDec,
+    handleDisplay,
+    text,
+    array,
+    handleChangeText,
+    handleAdd,
+  } = props;
 
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center h-screen">
