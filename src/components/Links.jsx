@@ -1,5 +1,3 @@
-import styles from "src/styles/Home.module.css";
-
 export const Links = () => {
   const ITEMS = [
     {
