@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Footer } from "src/components/Footer";
 import { Main } from "src/components/Main";
 import { Header } from "src/components/Header";
+import { CountButton } from "src/components/CountButton";
 
 const About = (props) => {
   const {
@@ -26,19 +27,9 @@ const About = (props) => {
       <Header />
       {isShow ? (
         <div className="flex gap-4 justify-center items-center">
-          <button
-            className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
-            onClick={handleClick}
-          >
-            +
-          </button>
+          <CountButton handleClick={handleClick} display={"+"} />
           <p className="text-5xl">{count}</p>
-          <button
-            className="px-4 py-2 border rounded-full border-white bg-gray-400 hover:bg-gray-50"
-            onClick={handleClickDec}
-          >
-            -
-          </button>
+          <CountButton handleClick={handleClickDec} display={"-"} />
         </div>
       ) : null}
       <button onClick={handleDisplay} className="mt-3 py-1 text-base ">

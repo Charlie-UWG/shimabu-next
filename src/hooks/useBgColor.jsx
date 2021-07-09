@@ -11,9 +11,8 @@ export const useBgColor = () => {
         return "lightBlue";
       }
       case "/about": {
-        return "beige";
+        return "gray";
       }
-
       default: {
         return "";
       }
