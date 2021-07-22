@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
 export const Posts = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
+  // const [posts, setPosts] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(false);
+  const [state, setState] = useState({
+    data: [],
+    loading: true,
+    error: null,
+  });
   const getPosts = useCallback(async () => {
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -12,33 +16,43 @@ export const Posts = () => {
         throw new Error("データの取得に失敗しました");
       }
       const json = await res.json();
-      setPosts(json);
+      setState({
+        ...state,
+        data: json,
+        loading: false,
+      });
+      // setPosts(json);
     } catch (error) {
-      setError(error);
+      setState({
+        ...state,
+        loading: false,
+        error,
+      });
+      // setError(error);
     }
-    setLoading(false);
+    // setLoading(false);
   }, []);
 
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
-  console.log(posts);
+  console.log("foo");
 
-  if (loading) {
+  if (state.loading) {
     return <div>ローディング中です。</div>;
   }
 
-  if (error) {
+  if (state.error) {
     return <div>{error.message}</div>;
   }
 
-  if (posts.length === 0) {
+  if (state.data.length === 0) {
     return <div>データは空です。</div>;
   }
   return (
     <ol className="list-decimal">
-      {posts.map((post) => {
+      {state.data.map((post) => {
         return <li key={post.id}>{post.title}</li>;
       })}
     </ol>
