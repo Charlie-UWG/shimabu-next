@@ -1,22 +1,21 @@
 import Head from "next/head";
-import { Footer } from "src/components/Footer";
-import { Main } from "src/components/Main";
+import { useCallback, useEffect, useState } from "react";
 import { Header } from "src/components/Header";
-import { CountButton } from "src/components/CountButton";
 
 const Home = (props) => {
-  const {
-    count,
-    isShow,
-    handleClick,
-    handleClickDec,
-    handleDisplay,
-    text,
-    array,
-    handleChangeText,
-    handleAdd,
-  } = props;
+  const [posts, setPosts] = useState([]);
 
+  const getPosts = useCallback(async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const json = await res.json();
+    setPosts(json);
+  }, []);
+
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
+
+  console.log(posts);
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center">
       <Head>
@@ -25,30 +24,13 @@ const Home = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      {isShow ? (
-        <div className="flex gap-4 justify-center items-center">
-          <CountButton handleClick={handleClick} display={"+"} />
-          <p className="text-5xl">{count}</p>
-          <CountButton handleClick={handleClickDec} display={"-"} />
-        </div>
+      {posts.length > 0 ? (
+        <ol className="list-decimal">
+          {posts.map((post) => {
+            return <li key={post.id}>{post.title}</li>;
+          })}
+        </ol>
       ) : null}
-      <button onClick={handleDisplay} className="mt-3 py-1 text-base ">
-        {isShow ? "非表示" : "表示"}
-      </button>
-      <input
-        type="text"
-        value={text}
-        onChange={handleChangeText}
-        className="my-3 mx-auto p-2"
-      />
-      <button onClick={handleAdd}>追加</button>
-      <ul>
-        {array.map((item, index) => {
-          return <li key={index}>{item}</li>;
-        })}
-      </ul>
-      <Main page="index" />
-      <Footer />
     </div>
   );
 };
