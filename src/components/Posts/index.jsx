@@ -1,68 +1,21 @@
-import { useCallback, useEffect, useReducer } from "react";
-
-const initialState = {
-  data: [],
-  loading: true,
-  error: null,
-};
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "end": {
-      return {
-        ...state,
-        data: action.data,
-        loading: false,
-      };
-    }
-    case "error": {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
-    }
-    default: {
-      throw new Error("no such as action type");
-    }
-  }
-};
+import { usePosts } from "src/hooks/usePosts";
 
 export const Posts = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { data, error, isLoading, isEmpty } = usePosts();
+  // console.log({ data, error });
 
-  const getPosts = useCallback(async () => {
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-      if (!res.ok) {
-        throw new Error("データの取得に失敗しました");
-      }
-      const json = await res.json();
-      dispatch({ type: "end", data: json });
-    } catch (error) {
-      dispatch({ type: "error", error });
-    }
-  }, []);
-
-  useEffect(() => {
-    getPosts();
-  }, [getPosts]);
-
-  console.log("foo");
-
-  if (state.loading) {
+  if (isLoading) {
     return <div>ローディング中です。</div>;
   }
-
-  if (state.error) {
+  if (error) {
     return <div>{error.message}</div>;
   }
-
-  if (state.data.length === 0) {
+  if (isEmpty) {
     return <div>データは空です。</div>;
   }
   return (
     <ol className="list-decimal">
-      {state.data.map((post) => {
+      {data.map((post) => {
         return <li key={post.id}>{post.title}</li>;
       })}
     </ol>
