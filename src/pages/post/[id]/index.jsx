@@ -1,11 +1,18 @@
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 import { Header } from "src/components/Header";
+import useSWR from "swr";
 
 const Post = () => {
   const router = useRouter();
   // console.log(router.query.id);
 
+  const { data, error } = useSWR(
+    router.query.id
+      ? `https://jsonplaceholder.typicode.com/posts/${router.query.id}`
+      : null
+  );
+  console.log({ data, error });
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center">
       <Head>
@@ -14,7 +21,10 @@ const Post = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div>{router.query.id}</div>
+      <div>
+        <h1 className="text-2xl">{data?.title}</h1>
+        <p>{data?.body}</p>
+      </div>
     </div>
   );
 };
