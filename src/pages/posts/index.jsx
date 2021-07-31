@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Header } from "src/components/Header";
 import { Posts } from "src/components/Posts";
 
-const Index = (props) => {
+const PostsIndex = () => {
   return (
     <div className="min-h-full px-2 flex flex-col justify-center items-center">
       <Head>
@@ -16,4 +16,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default PostsIndex;
