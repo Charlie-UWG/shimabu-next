@@ -13,6 +13,16 @@ export const Header = () => {
           Posts
         </a>
       </Link>
+      <Link href="/users">
+        <a className="text-xl bg-gray-400 px-4 py-3 rounded-lg hover:text-blue-300 hover:bg-gray-300 transition-colors duration-300">
+          Users
+        </a>
+      </Link>
+      <Link href="/comments">
+        <a className="text-xl bg-gray-400 px-4 py-3 rounded-lg hover:text-blue-300 hover:bg-gray-300 transition-colors duration-300">
+          Comments
+        </a>
+      </Link>
     </div>
   );
 };
